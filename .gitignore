@@ -1,28 +1,46 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+# Global OS / Editor ignores 
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
 
-# Environment files
-/.env
+# Root-level environment files 
+.env
+.env.*
+ 
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Angular (Frontend) ignores  
+frontend/node_modules/
+frontend/dist/
+frontend/out-tsc/
+frontend/tmp/
+frontend/.angular/
+frontend/coverage/
+frontend/e2e/test-output/
+frontend/.ng/
+frontend/.angular-cli.json
+frontend/*.tsbuildinfo
 
-# TypeScript cache
-*.tsbuildinfo
+ 
+# Node.js Backend ignores 
+backend/node_modules/
+backend/dist/
+backend/logs/
+backend/tmp/
+backend/.env
+backend/.env.local
+backend/*.tsbuildinfo
 
-# Logs
+
+# Package Manager Files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+ 
+# Misc
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
