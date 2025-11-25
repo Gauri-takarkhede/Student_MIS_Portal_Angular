@@ -1,0 +1,25 @@
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 6px;
+    background: #2d7ff9;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+}

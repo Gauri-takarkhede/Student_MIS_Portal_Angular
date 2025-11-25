@@ -1,0 +1,61 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+  <h1 class="text-3xl font-bold mb-6">Student Dashboard</h1>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center text-gray-600">
+    Loading your dashboard...
+  </div>
+
+  <!-- Profile Section -->
+  <div *ngIf="!loading" class="bg-white p-5 rounded-xl shadow-md mb-6">
+    <h2 class="text-xl font-semibold mb-4">Welcome, {{ student?.name }}</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <p><strong>MIS:</strong> {{ student?.mis }}</p>
+      <p><strong>Email:</strong> {{ student?.email }}</p>
+      <p><strong>CGPA:</strong> {{ student?.cgpa }}</p>
+      <p>
+        <strong>Department:</strong> {{ student?.department || "Computer" }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Dashboard Actions -->
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <!-- Electives -->
+    <div
+      routerLink="/student/electives"
+      class="bg-blue-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-blue-700 transition"
+    >
+      <h3 class="text-xl font-semibold mb-2">Electives</h3>
+      <p>Submit and view your elective preferences</p>
+    </div>
+
+    <!-- Results -->
+    <div
+      routerLink="/student/results"
+      class="bg-green-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-green-700 transition"
+    >
+      <h3 class="text-xl font-semibold mb-2">Results</h3>
+      <p>Check your semester results</p>
+    </div>
+
+    <!-- Bonafide -->
+    <div
+      routerLink="/student/bonafide"
+      class="bg-yellow-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-yellow-700 transition"
+    >
+      <h3 class="text-xl font-semibold mb-2">Bonafide Request</h3>
+      <p>Request bonafide certificate</p>
+    </div>
+
+    <!-- Feedback / Queries -->
+    <div
+      routerLink="/student/feedback"
+      class="bg-purple-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-purple-700 transition"
+    >
+      <h3 class="text-xl font-semibold mb-2">Feedback / Queries</h3>
+      <p>Submit feedback or queries</p>
+    </div>
+  </div>
+</div>

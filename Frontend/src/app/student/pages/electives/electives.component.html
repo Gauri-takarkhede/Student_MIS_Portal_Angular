@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2 class="text-primary mb-3">Elective Preference Form</h2>
+
+  <form [formGroup]="electiveForm" (ngSubmit)="submitPreferences()">
+    <div class="form-group mb-3">
+      <label>Preference 1</label>
+      <select class="form-control" formControlName="p1">
+        <option value="">Select</option>
+        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Preference 2</label>
+      <select class="form-control" formControlName="p2">
+        <option value="">Select</option>
+        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Preference 3</label>
+      <select class="form-control" formControlName="p3">
+        <option value="">Select</option>
+        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="electiveForm.invalid"
+    >
+      Submit Preferences
+    </button>
+  </form>
+</div>
