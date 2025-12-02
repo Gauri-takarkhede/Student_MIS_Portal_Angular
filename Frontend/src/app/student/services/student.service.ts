@@ -17,7 +17,16 @@ export class StudentService {
     return this.http.get(`${this.baseUrl}/profiles`);
   }
 
+  getPublishedModules() {
+    return this.http.get(`${this.baseUrl}/published`);
+  }
+
   submitElectives(data: any) {
-    return this.http.post(`${this.baseUrl}/submitElectives`, data);
+    const token = localStorage.getItem('student-token');
+    return this.http.post(`${this.baseUrl}/submitElectives`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }

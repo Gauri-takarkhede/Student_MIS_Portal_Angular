@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { StudentService } from '../../services/student.service';
+import { uniquePreferencesValidator } from './electives.validator';
 
 @Component({
   selector: 'app-electives',
@@ -9,7 +10,8 @@ import { StudentService } from '../../services/student.service';
 })
 export class ElectivesComponent {
   electiveForm!: FormGroup;
-  subjects = ['ML', 'AI', 'DSBDA', 'Cloud Computing', 'Blockchain'];
+  modules: any = null;
+  selectedModule: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -17,20 +19,51 @@ export class ElectivesComponent {
   ) {}
 
   ngOnInit(): void {
-    this.electiveForm = this.fb.group({
-      p1: ['', Validators.required],
-      p2: ['', Validators.required],
-      p3: ['', Validators.required],
+    this.electiveForm = this.fb.group(
+      {
+        moduleId: ['', Validators.required],
+        p1: ['', Validators.required],
+        p2: ['', Validators.required],
+        p3: ['', Validators.required],
+      },
+      {
+        validators: [uniquePreferencesValidator],
+      }
+    );
+
+    this.studentService.getPublishedModules().subscribe((data) => {
+      this.modules = data;
     });
   }
 
-  submitPreferences() {
-    if (this.electiveForm.valid) {
-      this.studentService
-        .submitElectives(this.electiveForm.value)
-        .subscribe((res) => {
-          alert('Preferences submitted successfully!');
-        });
+  onModuleChange() {
+    const id: string = this.electiveForm.value.moduleId;
+    if (!id) {
+      this.selectedModule = null;
+      return;
     }
+    this.selectedModule = this.modules.find((m: any) => m._id === id);
+  }
+
+  submitPreferences() {
+    if (this.electiveForm.invalid) {
+      if (this.electiveForm.errors?.['duplicatePreferences']) {
+        alert('Duplicate preference not allowed');
+      }
+      return;
+    }
+
+    const payload = {
+      moduleId: this.electiveForm.value.moduleId,
+      preferences: [
+        this.electiveForm.value.p1,
+        this.electiveForm.value.p2,
+        this.electiveForm.value.p3,
+      ],
+    };
+
+    this.studentService.submitElectives(payload).subscribe(() => {
+      alert('Preferences submitted!');
+    });
   }
 }

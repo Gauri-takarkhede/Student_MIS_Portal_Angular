@@ -20,7 +20,7 @@ connectDB();
 
 // Routes
 app.use("/api/students", studentRoutes);
-app.use("/api/elective", electiveRoutes);
+app.use("/api/electives", electiveRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/results", resultRoutes);
 app.use("/api/feedback", feedbackRoutes);

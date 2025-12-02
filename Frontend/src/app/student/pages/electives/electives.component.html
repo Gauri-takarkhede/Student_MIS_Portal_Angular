@@ -1,37 +1,50 @@
-<div class="container mt-4">
-  <h2 class="text-primary mb-3">Elective Preference Form</h2>
-
-  <form [formGroup]="electiveForm" (ngSubmit)="submitPreferences()">
-    <div class="form-group mb-3">
-      <label>Preference 1</label>
-      <select class="form-control" formControlName="p1">
-        <option value="">Select</option>
-        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
-      </select>
-    </div>
-
-    <div class="form-group mb-3">
-      <label>Preference 2</label>
-      <select class="form-control" formControlName="p2">
-        <option value="">Select</option>
-        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
-      </select>
-    </div>
-
-    <div class="form-group mb-3">
-      <label>Preference 3</label>
-      <select class="form-control" formControlName="p3">
-        <option value="">Select</option>
-        <option *ngFor="let sub of subjects" [value]="sub">{{ sub }}</option>
-      </select>
-    </div>
-
-    <button
-      class="btn btn-success"
-      type="submit"
-      [disabled]="electiveForm.invalid"
+<form [formGroup]="electiveForm" (ngSubmit)="submitPreferences()">
+  <div class="form-group mb-3">
+    <label>Select Module</label>
+    <select
+      class="form-control"
+      formControlName="moduleId"
+      (change)="onModuleChange()"
     >
-      Submit Preferences
-    </button>
-  </form>
-</div>
+      <option value="">Select Module</option>
+      <option *ngFor="let m of modules" [value]="m._id">
+        {{ m.moduleName }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedModule">
+    <h4>{{ selectedModule.moduleName }}</h4>
+
+    <form [formGroup]="electiveForm" (ngSubmit)="submitPreferences()">
+      <div class="form-group mb-3">
+        <label>Preference 1</label>
+        <select class="form-control" formControlName="p1">
+          <option *ngFor="let sub of selectedModule.subjects" [value]="sub">
+            {{ sub }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label>Preference 2</label>
+        <select class="form-control" formControlName="p2">
+          <option *ngFor="let sub of selectedModule.subjects" [value]="sub">
+            {{ sub }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label>Preference 3</label>
+        <select class="form-control" formControlName="p3">
+          <option *ngFor="let sub of selectedModule.subjects" [value]="sub">
+            {{ sub }}
+          </option>
+        </select>
+      </div>
+
+      <button class="btn btn-success" type="submit">Submit Preferences</button>
+    </form>
+  </div>
+</form>

@@ -4,6 +4,7 @@ import User from "../models/user.model.js";
 export const auth = async (req, res, next) => {
   try {
     const header = req.headers.authorization;
+    console.log(header, "header");
 
     if (!header || !header.startsWith("Bearer ")) {
       return res.status(401).json({ message: "No token provided" });

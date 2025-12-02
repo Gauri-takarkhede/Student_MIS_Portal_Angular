@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Create Elective Module</h2>
+
+  <form [formGroup]="electiveForm" (ngSubmit)="createModule()">
+    <div class="mb-3">
+      <label>Module Name</label>
+      <input formControlName="moduleName" class="form-control" />
+    </div>
+
+    <h3>Subjects</h3>
+
+    <div formArrayName="subjectsArr">
+      <div
+        *ngFor="let s of subjectsArr.controls; let i = index"
+        [formGroupName]="i"
+        class="mb-2 d-flex gap-2 align-items-center"
+      >
+        <input
+          formControlName="subject"
+          placeholder="Subject Name"
+          class="form-control"
+          type="text"
+        />
+
+        <input
+          formControlName="maxLimit"
+          type="number"
+          placeholder="Max Limit"
+          class="form-control"
+        />
+
+        <button type="button" class="btn btn-danger" (click)="removeSubject(i)">
+          Remove
+        </button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary mt-2" (click)="addSubject()">
+      + Add Subject
+    </button>
+
+    <br /><br />
+    <button type="submit" class="btn btn-primary">Create Elective</button>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <h2 class="text-primary mb-3">Allocate Electives</h2>
+
+  <!-- Select Module -->
+  <div class="form-group mb-3">
+    <label>Select Module</label>
+    <select class="form-control" (change)="onModuleSelect($event)">
+      <option value="">Select Module</option>
+      <option *ngFor="let m of modules" [value]="m._id">
+        {{ m.moduleName }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Module Details -->
+  <div *ngIf="selectedModule" class="card p-3 mb-3">
+    <h5>{{ selectedModule.moduleName }}</h5>
+    <p><strong>Subjects:</strong> {{ selectedModule.subjects.join(", ") }}</p>
+    <p>
+      <strong>Max Limits:</strong>
+      <span *ngFor="let s of selectedModule.subjects">
+        {{ s }}: {{ selectedModule.maxLimits[s] }} &nbsp;
+      </span>
+    </p>
+  </div>
+
+  <button
+    class="btn btn-success"
+    (click)="allocate()"
+    [disabled]="!selectedModule || loading"
+  >
+    {{ loading ? "Allocating..." : "Run Allocation" }}
+  </button>
+</div>

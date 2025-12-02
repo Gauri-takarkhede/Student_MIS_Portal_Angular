@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h2 class="text-primary mb-4">Faculty Dashboard</h2>
+
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <button
+        class="btn btn-outline-primary w-100"
+        (click)="goTo('create-elective')"
+      >
+        Create Elective Module
+      </button>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <button
+        class="btn btn-outline-success w-100"
+        (click)="goTo('manage-electives')"
+      >
+        Manage / Publish Electives
+      </button>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <button class="btn btn-outline-warning w-100" (click)="goTo('allocate')">
+        Allocate Electives
+      </button>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <button
+        class="btn btn-outline-info w-100"
+        (click)="goTo('view-allocations')"
+      >
+        View Allocations
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <button class="btn btn-outline-primary w-100" (click)="getAllPreferences()">
+      Get Student Response
+    </button>
+
+    <ng-container *ngIf="allPreferences && allPreferences.length">
+      <div
+        class="mt-3 p-3 bg-light rounded"
+        *ngFor="let pref of allPreferences; let i = index"
+      >
+        <strong>{{ i + 1 }}.</strong>
+        <strong> {{ pref.studentId.name }} </strong>
+        <div><strong>Module:</strong> {{ pref.moduleId.moduleName }}</div>
+        <div>
+          <strong>Preferences:</strong> {{ pref.preferences.join(", ") }}
+        </div>
+      </div>
+    </ng-container>
+
+    <div *ngIf="loading" class="text-center mt-2">Loading...</div>
+    <div *ngIf="!allPreferences?.length" class="text-muted mt-2">
+      No preferences found
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

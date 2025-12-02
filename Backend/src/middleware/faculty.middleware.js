@@ -1,4 +1,5 @@
 export const facultyOnly = (req, res, next) => {
+  console.log(req);
   if (req.user.role !== "faculty") {
     return res.status(403).json({ message: "Access denied. Faculty only." });
   }
