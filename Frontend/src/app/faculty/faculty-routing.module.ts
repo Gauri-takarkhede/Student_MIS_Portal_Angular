@@ -8,7 +8,7 @@ import { FacultyElectivesComponent } from './pages/faculty-electives/faculty-ele
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'dashboard/:mis',
     component: FacultyDashboardComponent,
   },
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     component: AllocateElectivesComponent,
   },
   {
-    path: 'view-allocations',
+    path: 'electives',
     component: FacultyElectivesComponent,
   },
 ];

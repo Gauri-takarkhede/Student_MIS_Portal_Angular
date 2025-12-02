@@ -1,8 +1,10 @@
+import BonafideRequest from "../models/bonafideRequest.model.js";
+
 export const createBonafideRequest = async (req, res) => {
   try {
     const { reason } = req.body;
     const studentId = req.user.id; // from JWT
-
+    console.log(reason, studentId);
     const newRequest = await BonafideRequest.create({
       studentId,
       reason,

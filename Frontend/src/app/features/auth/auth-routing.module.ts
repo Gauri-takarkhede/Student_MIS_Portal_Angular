@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentLoginComponent } from './pages/student-login/student-login.component';
-import { StudentRegisterComponent } from './pages/student-register/student-register.component';
-import { FacultyLoginComponent } from './pages/faculty-login/faculty-login.component';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
-  { path: 'student-login', component: StudentLoginComponent },
-  { path: 'student-register', component: StudentRegisterComponent },
-  { path: 'faculty-login', component: FacultyLoginComponent },
-
-  // Default auth route
-  { path: '', redirectTo: 'student-login', pathMatch: 'full' },
-
-  // Wildcard inside auth
-  { path: '**', redirectTo: 'student-login' },
+  { path: '', component: AuthComponent },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('../../shared/shared.module').then((m) => m.SharedModule),
+  },
 ];
 
 @NgModule({

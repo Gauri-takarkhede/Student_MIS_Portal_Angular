@@ -7,6 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FacultyDashboardComponent } from './pages/faculty-dashboard/faculty-dashboard.component';
 import { AllocateElectivesComponent } from './pages/allocate-electives/allocate-electives.component';
 import { FacultyElectivesComponent } from './pages/faculty-electives/faculty-electives.component';
+import { FacultyBonafideComponent } from './pages/faculty-bonafide/faculty-bonafide.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,20 @@ import { FacultyElectivesComponent } from './pages/faculty-electives/faculty-ele
     FacultyDashboardComponent,
     AllocateElectivesComponent,
     FacultyElectivesComponent,
+    FacultyBonafideComponent,
   ],
-  imports: [CommonModule, FacultyRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FacultyRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+  ],
+  exports: [
+    FacultyDashboardComponent,
+    FacultyElectivesComponent,
+    FacultyBonafideComponent,
+  ],
 })
 export class FacultyModule {}

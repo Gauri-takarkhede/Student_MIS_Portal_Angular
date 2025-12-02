@@ -1,0 +1,6 @@
+<ng-container *ngIf="!userRole">
+  <app-student-dashboard></app-student-dashboard>
+</ng-container>
+<ng-container *ngIf="userRole">
+  <app-faculty-dashboard></app-faculty-dashboard>
+</ng-container>

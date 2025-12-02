@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { StudentService } from '../../services/student.service';
-import { uniquePreferencesValidator } from './electives.validator';
+import { uniquePreferencesValidator } from './student-electives.validator';
 
 @Component({
-  selector: 'app-electives',
-  templateUrl: './electives.component.html',
-  styleUrls: ['./electives.component.scss'],
+  selector: 'app-student-electives',
+  templateUrl: './student-electives.component.html',
+  styleUrls: ['./student-electives.component.scss'],
 })
-export class ElectivesComponent {
+export class StudentElectivesComponent {
   electiveForm!: FormGroup;
   modules: any = null;
   selectedModule: any = null;

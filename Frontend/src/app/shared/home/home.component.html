@@ -1,0 +1,12 @@
+<mat-drawer-container autosize class="h-100">
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <div>
+    <button type="button" matButton (click)="drawer.toggle()">
+      <mat-icon>home</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

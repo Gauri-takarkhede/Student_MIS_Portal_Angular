@@ -44,4 +44,16 @@ export class FacultyService {
   getAllPreferences() {
     return this.http.get(`${this.baseUrl}/getAllPreferences`);
   }
+
+  getAllRequests() {
+    return this.http.get(`${this.baseUrl}/bonafide/all`);
+  }
+
+  approve(id: string) {
+    return this.http.patch(`${this.baseUrl}/bonafide/approve/${id}`, {});
+  }
+
+  reject(id: string) {
+    return this.http.patch(`${this.baseUrl}/bonafide/reject/${id}`, {});
+  }
 }

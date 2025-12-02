@@ -22,7 +22,7 @@ export class StudentService {
   }
 
   submitElectives(data: any) {
-    const token = localStorage.getItem('student-token');
+    const token = localStorage.getItem('token');
     return this.http.post(`${this.baseUrl}/submitElectives`, data, {
       headers: {
         Authorization: `Bearer ${token}`,

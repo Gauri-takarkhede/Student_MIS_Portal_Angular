@@ -1,0 +1,6 @@
+<ng-container *ngIf="!userRole">
+  <app-student-bonafide></app-student-bonafide>
+</ng-container>
+<ng-container *ngIf="userRole">
+  <app-faculty-bonafide></app-faculty-bonafide>
+</ng-container>

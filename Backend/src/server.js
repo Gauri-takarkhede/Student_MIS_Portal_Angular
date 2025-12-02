@@ -7,6 +7,7 @@ import electiveRoutes from "./routes/elective.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import resultRoutes from "./routes/result.routes.js";
 import feedbackRoutes from "./routes/feedback.routes.js";
+import bonafideRoutes from "./routes/bonafide.routes.js";
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/electives", electiveRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/results", resultRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api/bonafide", bonafideRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

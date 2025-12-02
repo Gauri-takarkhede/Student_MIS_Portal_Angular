@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -20,7 +21,7 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   loadStudent() {
-    const mis = this.route.snapshot.paramMap.get('mis');
+    const mis = localStorage.getItem('mis');
     this.studentService.getProfile(mis).subscribe({
       next: (res: any) => {
         this.student = res;

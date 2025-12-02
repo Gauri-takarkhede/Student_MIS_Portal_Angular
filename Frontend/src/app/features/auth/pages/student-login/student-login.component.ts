@@ -18,6 +18,7 @@ export class StudentLoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
+      role: ['', Validators.required],
       mis: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
@@ -28,18 +29,23 @@ export class StudentLoginComponent {
 
     this.loading = true;
 
-    let { mis, password } = this.loginForm.value;
+    let { role, mis, password } = this.loginForm.value;
     mis = Number(mis);
 
-    this.authService.studentLogin({ mis, password }).subscribe({
+    const roleLogin =
+      role === 'Student'
+        ? this.authService.studentLogin
+        : this.authService.facultyLogin;
+    roleLogin({ mis, password }).subscribe({
       next: (res: any) => {
         this.loading = false;
         this.errorMsg = '';
 
-        localStorage.setItem('student-token', res.token);
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('mis', mis);
 
         // Redirect to student dashboard
-        this.router.navigate(['/student/dashboard', mis]);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.loading = false;
