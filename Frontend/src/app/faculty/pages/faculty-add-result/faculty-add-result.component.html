@@ -1,0 +1,57 @@
+<h2>Add Result</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Select Student:</label>
+  <select formControlName="studentId">
+    <option *ngFor="let s of students" [value]="s._id">
+      {{ s.name }} ({{ s.mis }})
+    </option>
+  </select>
+
+  <label>Semester:</label>
+  <input type="text" formControlName="semester" />
+
+  <label>Academic Year:</label>
+  <input type="text" formControlName="academicYear" />
+
+  <hr />
+
+  <h3>Subjects</h3>
+
+  <button type="button" (click)="addSubject()">+ Add Subject</button>
+
+  <div formArrayName="subjects">
+    <div
+      *ngFor="let sub of subjects.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <input placeholder="Subject Name" formControlName="name" />
+
+      <input placeholder="CGPA Got" type="number" formControlName="cgpaGot" />
+
+      <input
+        placeholder="Passing CGPA"
+        type="number"
+        formControlName="passingCgpa"
+      />
+
+      <button type="button" (click)="removeSubject(i)">Remove</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="calculateResult()">Calculate Result</button>
+
+  <!-- 📌 Result Preview -->
+  <div *ngIf="preview">
+    <h3>Calculated Result Preview</h3>
+    <p><strong>GPA:</strong> {{ preview.cgpa }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [style.color]="preview.status ? 'green' : 'red'">
+        {{ preview.status ? "PASS" : "FAIL" }}
+      </span>
+    </p>
+  </div>
+
+  <button type="submit" [disabled]="!preview">Submit</button>
+</form>

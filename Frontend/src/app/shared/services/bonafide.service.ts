@@ -10,7 +10,7 @@ export class BonafideService {
   constructor(private http: HttpClient) {}
 
   createRequest(data: any) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.post(`${this.base}/request`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -19,7 +19,7 @@ export class BonafideService {
   }
 
   getMyRequests() {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.get<any>(`${this.base}/my-requests`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -28,14 +28,43 @@ export class BonafideService {
   }
 
   getAllRequests() {
-    return this.http.get<any>(`${this.base}/all`);
+    const token = sessionStorage.getItem('token');
+    return this.http.get<any>(`${this.base}/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   approve(id: string) {
-    return this.http.patch(`${this.base}/approve/${id}`, {});
+    const token = sessionStorage.getItem('token');
+    return this.http.patch(
+      `${this.base}/approve/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   }
 
   reject(id: string) {
-    return this.http.patch(`${this.base}/reject/${id}`, {});
+    const token = sessionStorage.getItem('token');
+    return this.http.patch(
+      `${this.base}/reject/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  downloadBonafide(id: String) {
+    return this.http.get(`${this.base}/download/${id}`, {
+      responseType: 'blob',
+    });
   }
 }

@@ -1,63 +1,49 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100 px-4">
-  <div class="w-full max-w-md bg-white p-6 rounded-xl shadow-lg">
-    <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+<div class="login-page">
+  <mat-card class="login-card">
+    <mat-card-content class="p-5">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-form-field>
+            <mat-label>Login as</mat-label>
+            <mat-select formControlName="role" matNativeControl required>
+              <mat-option value="" disabled selected>Select role</mat-option>
+              <mat-option value="student">Student</mat-option>
+              <mat-option value="faculty">Faculty</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
 
-    <!-- Error Message -->
-    <p *ngIf="errorMsg" class="text-red-600 mb-3 text-center">{{ errorMsg }}</p>
+        <p>
+          <mat-form-field>
+            <mat-label>MIS Number</mat-label>
+            <div class="d-flex">
+              <input matInput formControlName="mis" />
+            </div>
+          </mat-form-field>
+        </p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <!-- Role Selection -->
-      <label class="block mb-1 font-medium">Login As</label>
-      <select formControlName="role" class="w-full border p-2 rounded mb-3">
-        <option value="" disabled selected>Select role</option>
-        <option value="student">Student</option>
-        <option value="faculty">Faculty</option>
-      </select>
-      <small
-        *ngIf="loginForm.get('role')?.touched && loginForm.get('role')?.invalid"
-        class="text-red-500"
-      >
-        Please select your role
-      </small>
+        <p>
+          <!-- Mat Password -->
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <div class="d-flex">
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+              />
 
-      <!-- MIS -->
-      <label class="block mb-1 font-medium">MIS Number</label>
-      <input
-        formControlName="mis"
-        type="text"
-        class="w-full border p-2 rounded mb-3"
-        placeholder="Enter MIS number"
-      />
-      <small
-        *ngIf="loginForm.get('mis')?.touched && loginForm.get('mis')?.invalid"
-        class="text-red-500"
-        >MIS is required</small
-      >
+              <span (click)="togglePassword()">
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </span>
+            </div>
+          </mat-form-field>
+        </p>
 
-      <!-- Password -->
-      <label class="block mb-1 font-medium">Password</label>
-      <input
-        formControlName="password"
-        type="password"
-        class="w-full border p-2 rounded mb-3"
-        placeholder="Enter password"
-      />
-      <small
-        *ngIf="
-          loginForm.get('password')?.touched &&
-          loginForm.get('password')?.invalid
-        "
-        class="text-red-500"
-        >Password is required</small
-      >
-
-      <!-- Login Button -->
-      <button
-        [disabled]="loading"
-        class="w-full bg-blue-600 text-white py-2 rounded mt-4 hover:bg-blue-700 transition"
-      >
-        {{ loading ? "Logging in..." : "Login" }}
-      </button>
-    </form>
-  </div>
+        <button class="submit-btn" type="submit" mat-button>Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

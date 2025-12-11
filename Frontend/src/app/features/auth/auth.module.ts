@@ -6,6 +6,11 @@ import { AuthComponent } from './auth.component';
 import { StudentLoginComponent } from './pages/student-login/student-login.component';
 import { StudentRegisterComponent } from './pages/student-register/student-register.component';
 import { FacultyLoginComponent } from './pages/faculty-login/faculty-login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -14,6 +19,15 @@ import { FacultyLoginComponent } from './pages/faculty-login/faculty-login.compo
     StudentRegisterComponent,
     FacultyLoginComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    MatSelectModule,
+  ],
 })
 export class AuthModule {}

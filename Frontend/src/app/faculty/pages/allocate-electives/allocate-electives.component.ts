@@ -29,12 +29,10 @@ export class AllocateElectivesComponent implements OnInit {
     this.selectedModule = this.modules.find((m: any) => m._id === id);
   }
 
-  allocate() {
-    if (!this.selectedModule) return;
-
+  allocate(id: string) {
     this.loading = true;
 
-    this.facultyService.allocate(this.selectedModule._id).subscribe({
+    this.facultyService.allocate(id).subscribe({
       next: (res) => {
         alert('Allocation completed successfully 🎉');
         this.loading = false;
@@ -45,4 +43,6 @@ export class AllocateElectivesComponent implements OnInit {
       },
     });
   }
+
+  delete(id: Number): void {}
 }

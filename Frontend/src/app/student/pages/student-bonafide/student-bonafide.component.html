@@ -1,66 +1,68 @@
-<h2 class="mb-3">Request Bonafide Certificate</h2>
+<div class="p-3">
+  <h2 class="mb-3">Request Bonafide Certificate</h2>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>Reason</mat-label>
-    <textarea matInput formControlName="reason" rows="4"></textarea>
-  </mat-form-field>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Reason</mat-label>
+      <textarea matInput formControlName="reason" rows="4"></textarea>
+    </mat-form-field>
 
-  <button mat-raised-button color="primary" [disabled]="loading">
-    Submit Request
-  </button>
+    <button mat-raised-button color="primary" [disabled]="loading">
+      Submit Request
+    </button>
 
-  <p class="mt-2 text-success" *ngIf="message">{{ message }}</p>
-</form>
+    <p class="mt-2 text-success" *ngIf="message">{{ message }}</p>
+  </form>
 
-<h2 class="mb-3">My Bonafide Requests</h2>
+  <h2 class="my-4">My Bonafide Requests</h2>
 
-<table mat-table [dataSource]="requests" class="mat-elevation-z2 w-100">
-  <!-- Reason -->
-  <ng-container matColumnDef="reason">
-    <th mat-header-cell *matHeaderCellDef>Reason</th>
-    <td mat-cell *matCellDef="let r">{{ r.reason }}</td>
-  </ng-container>
+  <table mat-table [dataSource]="requests" class="mat-elevation-z2 w-100">
+    <!-- Reason -->
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef>Reason</th>
+      <td mat-cell *matCellDef="let r">{{ r.reason }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="createdAt">
-    <th mat-header-cell *matHeaderCellDef>Applied Date</th>
-    <td mat-cell *matCellDef="let r">{{ r.createdAt }}</td>
-  </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Applied Date</th>
+      <td mat-cell *matCellDef="let r">{{ r.createdAt }}</td>
+    </ng-container>
 
-  <!-- Status -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td mat-cell *matCellDef="let r">
-      <span
-        [ngClass]="{
-          'text-warning': r.status === 'pending',
-          'text-success': r.status === 'approved',
-          'text-danger': r.status === 'rejected'
-        }"
-      >
-        {{ r.status | titlecase }}
-      </span>
-    </td>
-  </ng-container>
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let r">
+        <span
+          [ngClass]="{
+            'text-warning': r.status === 'pending',
+            'text-success': r.status === 'approved',
+            'text-danger': r.status === 'rejected'
+          }"
+        >
+          {{ r.status | titlecase }}
+        </span>
+      </td>
+    </ng-container>
 
-  <!-- Download -->
-  <ng-container matColumnDef="download">
-    <th mat-header-cell *matHeaderCellDef>Download</th>
-    <td mat-cell *matCellDef="let r">
-      <button
-        mat-button
-        color="primary"
-        *ngIf="r.status === 'approved'"
-        (click)="download(r._id)"
-      >
-        Download
-      </button>
-    </td>
-  </ng-container>
+    <!-- Download -->
+    <ng-container matColumnDef="download">
+      <th mat-header-cell *matHeaderCellDef>Download</th>
+      <td mat-cell *matCellDef="let r">
+        <button
+          mat-button
+          color="primary"
+          *ngIf="r.status === 'approved'"
+          (click)="download(r._id)"
+        >
+          Download
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['reason', 'status', 'download']"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: ['reason', 'status', 'download']"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="['reason', 'status', 'download']"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['reason', 'status', 'download']"
+    ></tr>
+  </table>
+</div>

@@ -35,7 +35,7 @@ export class FacultyLoginComponent {
         this.loading = false;
         this.errorMsg = '';
 
-        localStorage.setItem('faculty-token', res.token);
+        sessionStorage.setItem('faculty-token', res.token);
 
         // Redirect to faculty dashboard
         this.router.navigate(['/faculty/dashboard']);

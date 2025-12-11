@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bonafide.component.scss'],
 })
 export class BonafideComponent implements OnInit {
-  public userRole: Number = -1;
+  public userRole: String = '';
   ngOnInit(): void {
-    const role = localStorage.getItem('role');
-    this.userRole = role ? JSON.parse(role) : -1;
+    const user = sessionStorage.getItem('user');
+    this.userRole = user ? JSON.parse(user).role : '';
   }
 }

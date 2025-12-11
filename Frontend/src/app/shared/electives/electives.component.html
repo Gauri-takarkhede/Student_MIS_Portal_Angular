@@ -1,6 +1,6 @@
-<ng-container *ngIf="!userRole">
+<ng-container *ngIf="userRole === 'student'">
   <app-student-electives></app-student-electives>
 </ng-container>
-<ng-container *ngIf="userRole">
+<ng-container *ngIf="userRole === 'faculty'">
   <app-faculty-electives></app-faculty-electives>
 </ng-container>

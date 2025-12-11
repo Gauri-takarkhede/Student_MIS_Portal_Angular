@@ -25,7 +25,7 @@ export class FacultyService {
   }
 
   allocate(moduleId: string) {
-    const token = localStorage.getItem('faculty-token');
+    const token = sessionStorage.getItem('faculty-token');
     return this.http.post(
       `${this.baseUrl}/allocate/${moduleId}`,
       {},

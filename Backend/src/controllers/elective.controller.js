@@ -2,7 +2,7 @@ import Elective from "../models/electives.model.js";
 import Preference from "../models/studentPreference.js";
 import Allocation from "../models/allocation.model..js";
 
-/** 1️⃣ Create new elective module  **/
+/**  Create new elective module  **/
 export const createElective = async (req, res) => {
   try {
     console.log("Incoming Body:", req.body);
@@ -55,16 +55,17 @@ export const publishElective = async (req, res) => {
   }
 };
 
-export const getPublishedElectives = async (req, res) => {
+export const getNonPublishedElectives = async (req, res) => {
   try {
-    const electives = await Elective.find({ isPublished: true });
+    console.log("I am inside publish");
+    const electives = await Elective.find({ isPublished: false });
     res.json(electives);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-/** 2️⃣ Get all elective modules **/
+/**  Get all elective modules **/
 export const getAllElectives = async (req, res) => {
   try {
     const electives = await Elective.find();
@@ -74,18 +75,37 @@ export const getAllElectives = async (req, res) => {
   }
 };
 
-/** 3️⃣ Student submits preferences **/
+/**  Student submits preferences **/
 export const submitPreferences = async (req, res) => {
   try {
     const { moduleId, preferences } = req.body;
+    const studentId = req.user.id; // assuming middleware sets req.user
 
+    //  Check if record already exists
+    const existing = await Preference.findOne({ studentId, moduleId });
+
+    if (existing) {
+      // Update existing record
+      existing.preferences = preferences;
+      await existing.save();
+
+      return res.json({
+        message: "Preferences updated successfully",
+        pref: existing,
+      });
+    }
+
+    // Create new preference entry
     const newPref = await Preference.create({
-      studentId: req.user.id,
+      studentId,
       moduleId,
       preferences,
     });
 
-    res.json({ message: "Preferences submitted", newPref });
+    res.json({
+      message: "Preferences submitted successfully",
+      pref: newPref,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -103,7 +123,7 @@ export const getAllPreferences = async (req, res) => {
   }
 };
 
-/** 4️⃣ Faculty allocates electives **/
+/** Faculty allocates electives **/
 export const allocateElectives = async (req, res) => {
   try {
     const { moduleId } = req.params;

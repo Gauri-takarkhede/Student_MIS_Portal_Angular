@@ -1,8 +1,8 @@
-<div class="container mt-4">
+<!-- <div class="container mt-4">
   <h2 class="text-primary mb-3">View Allocations</h2>
 
   <!-- Select Module -->
-  <div class="form-group mb-3">
+<!-- <div class="form-group mb-3">
     <label>Select Module</label>
     <select class="form-control" (change)="onModuleSelect($event)">
       <option value="">Select Module</option>
@@ -10,19 +10,19 @@
         {{ m.moduleName }}
       </option>
     </select>
-  </div>
+  </div> -->
 
-  <!-- Generate PDF Button -->
-  <button
+<!-- Generate PDF Button -->
+<!-- <button
     *ngIf="allocations.length > 0"
     class="btn btn-success mb-3"
     (click)="generatePDF()"
   >
     📥 Generate PDF
-  </button>
+  </button> -->
 
-  <!-- Table -->
-  <table
+<!-- Table -->
+<!-- <table
     *ngIf="allocations.length > 0"
     class="table table-bordered mt-3"
     #allocationTable
@@ -47,4 +47,17 @@
   <p *ngIf="allocations.length === 0 && selectedModule" class="text-muted">
     No allocations found for this module.
   </p>
+</div> -->
+<div class="p-3">
+  <mat-tab-group>
+    <mat-tab label="Create">
+      <app-create-electives></app-create-electives>
+    </mat-tab>
+    <mat-tab label="Allocate">
+      <app-allocate-electives></app-allocate-electives>
+    </mat-tab>
+    <mat-tab label="Allocations">
+      <app-view-electives></app-view-electives>
+    </mat-tab>
+  </mat-tab-group>
 </div>

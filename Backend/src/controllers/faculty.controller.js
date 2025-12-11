@@ -25,10 +25,10 @@ export const createFaculty = async (req, res) => {
 
 export const loginFaculty = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { mis, password } = req.body;
 
     // 1. Check if faculty exists
-    const faculty = await Faculty.findOne({ email });
+    const faculty = await Faculty.findOne({ mis });
     if (!faculty) {
       return res.status(400).json({ message: "Faculty not found" });
     }
@@ -49,10 +49,10 @@ export const loginFaculty = async (req, res) => {
     res.json({
       message: "Faculty login successful",
       token,
-      faculty: {
-        id: faculty._id,
+      user: {
         name: faculty.name,
-        email: faculty.email,
+        mis: faculty.mis,
+        role: "faculty",
       },
     });
   } catch (err) {

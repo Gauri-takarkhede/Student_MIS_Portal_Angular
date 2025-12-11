@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,14 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   public userRole: Number = -1;
-  public misNum: Number = 0;
-  constructor() {}
+  public studentName: String = '';
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const role = localStorage.getItem('role');
-    this.userRole = role ? JSON.parse(role) : -1;
-
-    const mis = localStorage.getItem('mis');
-    this.misNum = mis ? JSON.parse(mis) : 0;
+    const user = sessionStorage.getItem('user');
+    this.studentName = user ? JSON.parse(user).name : '';
+    this.userRole = user ? JSON.parse(user).role : -1;
+  }
+  signOut(): void {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
 }

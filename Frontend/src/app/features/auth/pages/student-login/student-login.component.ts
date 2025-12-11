@@ -41,8 +41,8 @@ export class StudentLoginComponent {
         this.loading = false;
         this.errorMsg = '';
 
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('mis', mis);
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('mis', mis);
 
         // Redirect to student dashboard
         this.router.navigate(['/dashboard']);

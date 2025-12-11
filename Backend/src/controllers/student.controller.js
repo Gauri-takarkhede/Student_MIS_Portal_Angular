@@ -25,3 +25,8 @@ export const createStudent = async (req, res) => {
   await student.save();
   res.status(201).json(student);
 };
+
+export const getAllStudents = async (req, res) => {
+  const students = await userSchema.find();
+  res.status(200).json(students);
+};

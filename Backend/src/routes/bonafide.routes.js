@@ -17,11 +17,11 @@ router.post("/request", auth, createBonafideRequest);
 router.get("/my-requests", auth, getMyBonafideRequests);
 
 // Faculty
-router.get("/all", auth, facultyOnly, getAllBonafideRequests);
-router.patch("/approve/:id", auth, facultyOnly, approveBonafide);
-router.patch("/reject/:id", auth, facultyOnly, rejectBonafide);
+router.get("/all", getAllBonafideRequests);
+router.patch("/approve/:id", auth, approveBonafide);
+router.patch("/reject/:id", auth, rejectBonafide);
 
 // Download
-router.get("/download/:id", auth, downloadBonafide);
+router.get("/download/:id", downloadBonafide);
 
 export default router;

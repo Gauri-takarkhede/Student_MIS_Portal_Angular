@@ -5,7 +5,6 @@ import {
   submitPreferences,
   allocateElectives,
   publishElective,
-  getPublishedElectives,
   getAllPreferences,
   getAllocations,
 } from "../controllers/elective.controller.js";

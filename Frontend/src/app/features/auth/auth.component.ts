@@ -12,6 +12,7 @@ export class AuthComponent {
   loginForm: FormGroup;
   loading = false;
   errorMsg = '';
+  hide: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -25,12 +26,14 @@ export class AuthComponent {
     });
   }
 
+  togglePassword() {
+    this.hide = !this.hide;
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) return;
 
     this.loading = true;
-
-    console.log('hi i am here');
     let { role, mis, password } = this.loginForm.value;
     mis = Number(mis);
 
@@ -44,10 +47,8 @@ export class AuthComponent {
         this.loading = false;
         this.errorMsg = '';
 
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('mis', mis);
-        const userRole = role === 'student' ? 0 : 1;
-        localStorage.setItem('role', JSON.stringify(userRole));
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('user', JSON.stringify(res.user));
 
         // Redirect to student dashboard
         this.router.navigate(['/home']);

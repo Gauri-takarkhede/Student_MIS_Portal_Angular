@@ -1,12 +1,12 @@
 <mat-drawer-container autosize class="h-100">
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer #drawer mode="side" opened>
     <app-sidebar></app-sidebar>
   </mat-drawer>
 
   <div>
-    <button type="button" matButton (click)="drawer.toggle()">
-      <mat-icon>home</mat-icon>
-    </button>
+    <div role="button" (click)="toggleDrawer(drawer)">
+      <mat-icon class="m-2">{{ drawer.opened ? "close" : "menu" }}</mat-icon>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

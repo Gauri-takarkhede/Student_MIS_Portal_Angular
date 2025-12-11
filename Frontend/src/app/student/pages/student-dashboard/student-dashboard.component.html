@@ -1,6 +1,4 @@
-<div class="p-6 bg-gray-100 min-h-screen">
-  <h1 class="text-3xl font-bold mb-6">Student Dashboard</h1>
-
+<div class="p-3 bg-gray-100 min-h-screen">
   <!-- Loading -->
   <div *ngIf="loading" class="text-center text-gray-600">
     Loading your dashboard...
@@ -20,42 +18,88 @@
     </div>
   </div>
 
-  <!-- Dashboard Actions -->
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-    <!-- Electives -->
-    <div
-      routerLink="/student/electives"
-      class="bg-blue-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-blue-700 transition"
-    >
-      <h3 class="text-xl font-semibold mb-2">Electives</h3>
-      <p>Submit and view your elective preferences</p>
-    </div>
-
-    <!-- Results -->
-    <div
-      routerLink="/student/results"
-      class="bg-green-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-green-700 transition"
-    >
-      <h3 class="text-xl font-semibold mb-2">Results</h3>
-      <p>Check your semester results</p>
-    </div>
-
-    <!-- Bonafide -->
-    <div
-      routerLink="/student/bonafide"
-      class="bg-yellow-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-yellow-700 transition"
-    >
-      <h3 class="text-xl font-semibold mb-2">Bonafide Request</h3>
-      <p>Request bonafide certificate</p>
-    </div>
-
-    <!-- Feedback / Queries -->
-    <div
-      routerLink="/student/feedback"
-      class="bg-purple-600 text-white p-6 rounded-xl shadow-lg cursor-pointer hover:bg-purple-700 transition"
-    >
-      <h3 class="text-xl font-semibold mb-2">Feedback / Queries</h3>
-      <p>Submit feedback or queries</p>
-    </div>
+  <div class="personal-info">
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Last name, First name"
+              formControlName="firstCtrl"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              formControlName="secondCtrl"
+              placeholder="Ex. 1 Main St, New York, NY"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div class="row">
+          <div class="col">
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              (click)="stepper.reset()"
+            >
+              Reset
+            </button>
+          </div>
+          <button
+            class="col-auto stepper-button border-0 bg-transparent"
+            matButton
+          >
+            Submit
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
   </div>
 </div>

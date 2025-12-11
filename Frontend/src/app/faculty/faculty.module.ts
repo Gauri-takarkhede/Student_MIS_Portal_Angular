@@ -11,6 +11,9 @@ import { FacultyBonafideComponent } from './pages/faculty-bonafide/faculty-bonaf
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { FacultyAddResultComponent } from './pages/faculty-add-result/faculty-add-result.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ViewElectivesComponent } from './pages/view-electives/view-electives.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
     AllocateElectivesComponent,
     FacultyElectivesComponent,
     FacultyBonafideComponent,
+    FacultyAddResultComponent,
+    ViewElectivesComponent,
   ],
   imports: [
     CommonModule,
@@ -28,11 +33,13 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    MatTabsModule,
   ],
   exports: [
     FacultyDashboardComponent,
     FacultyElectivesComponent,
     FacultyBonafideComponent,
+    FacultyAddResultComponent,
   ],
 })
 export class FacultyModule {}

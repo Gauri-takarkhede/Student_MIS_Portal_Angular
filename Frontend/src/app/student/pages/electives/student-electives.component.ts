@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { StudentService } from '../../services/student.service';
 import { uniquePreferencesValidator } from './student-electives.validator';
 
@@ -22,48 +22,58 @@ export class StudentElectivesComponent {
     this.electiveForm = this.fb.group(
       {
         moduleId: ['', Validators.required],
-        p1: ['', Validators.required],
-        p2: ['', Validators.required],
-        p3: ['', Validators.required],
+        preferences: this.fb.array([]),
       },
-      {
-        validators: [uniquePreferencesValidator],
-      }
+      { validators: [uniquePreferencesValidator] }
     );
 
-    this.studentService.getPublishedModules().subscribe((data) => {
+    this.studentService.getNonPublishedModules().subscribe((data) => {
       this.modules = data;
     });
   }
 
+  get preferencesArray() {
+    return this.electiveForm.get('preferences') as FormArray;
+  }
+
   onModuleChange() {
-    const id: string = this.electiveForm.value.moduleId;
-    if (!id) {
-      this.selectedModule = null;
-      return;
-    }
+    const id = this.electiveForm.value.moduleId;
+
+    this.preferencesArray.clear();
+
     this.selectedModule = this.modules.find((m: any) => m._id === id);
+
+    if (this.selectedModule) {
+      const totalSubjects = this.selectedModule.subjects.length;
+
+      // Create dropdowns dynamically
+      for (let i = 0; i < totalSubjects; i++) {
+        this.preferencesArray.push(this.fb.control('', Validators.required));
+      }
+      this.electiveForm.updateValueAndValidity();
+    }
   }
 
   submitPreferences() {
     if (this.electiveForm.invalid) {
-      if (this.electiveForm.errors?.['duplicatePreferences']) {
-        alert('Duplicate preference not allowed');
+      if (this.electiveForm.errors) {
+        alert('Preferences should be unique');
+      } else {
+        alert('Please fill all preferences!');
       }
+
       return;
     }
+    const preferences = this.preferencesArray.value;
 
     const payload = {
       moduleId: this.electiveForm.value.moduleId,
-      preferences: [
-        this.electiveForm.value.p1,
-        this.electiveForm.value.p2,
-        this.electiveForm.value.p3,
-      ],
+      preferences: preferences,
     };
 
-    this.studentService.submitElectives(payload).subscribe(() => {
-      alert('Preferences submitted!');
+    this.studentService.submitElectives(payload).subscribe((data: any) => {
+      const msg = data.message;
+      alert(msg);
     });
   }
 }

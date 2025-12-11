@@ -4,10 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ElectivesComponent } from './electives/electives.component';
 import { BonafideComponent } from './bonafide/bonafide.component';
+import { ResultsComponent } from './results/results.component';
+import { QueryComponent } from './query/query.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: HomeComponent,
     children: [
       {
@@ -23,23 +27,19 @@ const routes: Routes = [
         component: BonafideComponent,
       },
       {
+        path: 'results',
+        component: ResultsComponent,
+      },
+      {
+        path: 'query',
+        component: QueryComponent,
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
       },
     ],
-  },
-  {
-    path: 'results',
-    loadChildren: () =>
-      import('../features/results/results.module').then((m) => m.ResultsModule),
-  },
-  {
-    path: 'feedback',
-    loadChildren: () =>
-      import('../features/feedback/feedback.module').then(
-        (m) => m.FeedbackModule
-      ),
   },
 ];
 

@@ -1,0 +1,50 @@
+<div class="container p-3">
+  <h2 class="text-primary mb-3">View Allocations</h2>
+
+  <!-- Select Module -->
+  <div class="form-group mb-3">
+    <label>Select Module</label>
+    <select class="form-control" (change)="onModuleSelect($event)">
+      <option value="">Select Module</option>
+      <option *ngFor="let m of modules" [value]="m._id">
+        {{ m.moduleName }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Generate PDF Button -->
+  <button
+    *ngIf="allocations.length > 0"
+    class="btn btn-success mb-3"
+    (click)="generatePDF()"
+  >
+    📥 Generate PDF
+  </button>
+
+  <!-- Table -->
+  <table
+    *ngIf="allocations.length > 0"
+    class="table table-bordered mt-3"
+    #allocationTable
+  >
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>MIS</th>
+        <th>Allocated Subject</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let a of allocations">
+        <td>{{ a.studentId?.name }}</td>
+        <td>{{ a.studentId?.mis }}</td>
+        <td>{{ a.allocatedSubject }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="allocations.length === 0 && selectedModule" class="text-muted">
+    No allocations found for this module.
+  </p>
+</div>

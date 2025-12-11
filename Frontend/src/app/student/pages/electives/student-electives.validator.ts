@@ -3,12 +3,15 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export const uniquePreferencesValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  const p1 = control.get('p1')?.value;
-  const p2 = control.get('p2')?.value;
-  const p3 = control.get('p3')?.value;
+  if (!control || !control.value) return null;
 
-  if (!p1 || !p2 || !p3) return null;
+  const prefs = control.get('preferences');
 
-  const set = new Set([p1, p2, p3]);
-  return set.size === 3 ? null : { duplicatePreferences: true };
+  if (!prefs || !prefs.value || !Array.isArray(prefs.value)) return null;
+
+  const arr = prefs.value.filter((v: any) => v); // remove empty
+
+  const unique = new Set(arr);
+
+  return unique.size === arr.length ? null : { duplicatePreferences: true };
 };

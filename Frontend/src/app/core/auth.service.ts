@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   private API = 'http://localhost:5000/api/auth';
-  private tokenKey = 'misToken';
-  private roleKey = 'misRole';
+  private tokenKey = 'token';
+  // private roleKey = 'misRole';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,6 @@ export class AuthService {
   }
 
   studentLogin(data: any) {
-    console.log(data, 'data auth service');
     return this.http.post(`${this.API}/student/login`, data);
   }
 
@@ -24,20 +23,20 @@ export class AuthService {
     return this.http.post(`${this.API}/faculty/login`, data);
   }
 
-  saveAuth(token: string, role: string) {
-    localStorage.setItem(this.tokenKey, token);
-    localStorage.setItem(this.roleKey, role);
-  }
+  // saveAuth(token: string, role: string) {
+  //   sessionStorage.setItem(this.tokenKey, token);
+  //   sessionStorage.setItem(this.roleKey, role);
+  // }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem(this.tokenKey);
+    return !!sessionStorage.getItem(this.tokenKey);
   }
 
-  getRole() {
-    return localStorage.getItem(this.roleKey);
-  }
+  // getRole() {
+  //   return sessionStorage.getItem(this.roleKey);
+  // }
 }

@@ -11,6 +11,8 @@ import { StudentModule } from 'src/app/student/student.module';
 import { FacultyModule } from 'src/app/faculty/faculty.module';
 import { ElectivesComponent } from './electives/electives.component';
 import { BonafideComponent } from './bonafide/bonafide.component';
+import { ResultsComponent } from './results/results.component';
+import { QueryComponent } from './query/query.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { BonafideComponent } from './bonafide/bonafide.component';
     DashboardComponent,
     ElectivesComponent,
     BonafideComponent,
+    ResultsComponent,
+    QueryComponent,
   ],
   imports: [
     CommonModule,

@@ -11,9 +11,12 @@
     href="/"
     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
   >
-    <svg class="bi me-2" width="40" height="32">
-      <use xlink:href="#bootstrap" />
-    </svg>
+    <img
+      src="../../../assets/student-logo.png"
+      alt=""
+      style="height: 50px"
+      class="mx-2"
+    />
     <span class="fs-4">MIS Portal</span>
   </a>
   <hr />
@@ -21,44 +24,52 @@
     <li>
       <div
         routerLink="dashboard"
-        class="nav-link link-dark"
+        class="nav-link link-dark d-flex"
         routerLinkActive="active"
       >
         <mat-icon>dashboard</mat-icon>
-        Dashboard
+        <span class="mx-2">Dashboard</span>
       </div>
     </li>
     <li>
       <div
         routerLink="electives"
-        class="nav-link link-dark"
+        class="nav-link link-dark d-flex"
         routerLinkActive="active"
       >
         <mat-icon>menu_book</mat-icon>
-        Electives
+        <span class="mx-2">Electives</span>
       </div>
     </li>
     <li>
-      <a href="#" class="nav-link link-dark">
+      <div
+        routerLink="results"
+        class="nav-link link-dark d-flex"
+        routerLinkActive="active"
+      >
         <mat-icon>grading</mat-icon>
-        Results
-      </a>
+        <span class="mx-2">Results</span>
+      </div>
     </li>
     <li>
       <div
         routerLink="bonafide"
-        class="nav-link link-dark"
+        class="nav-link link-dark d-flex"
         routerLinkActive="active"
       >
         <mat-icon>article</mat-icon>
-        Bonafide
+        <span class="mx-2">Bonafide</span>
       </div>
     </li>
     <li>
-      <a href="#" class="nav-link link-dark">
+      <div
+        routerLink="query"
+        class="nav-link link-dark d-flex"
+        routerLinkActive="active"
+      >
         <mat-icon>help_center</mat-icon>
-        Query
-      </a>
+        <span class="mx-2">Query</span>
+      </div>
     </li>
   </ul>
   <hr />
@@ -77,14 +88,13 @@
         height="32"
         class="rounded-circle me-2"
       />
-      <strong>{{ misNum }}</strong>
+      <strong>{{ studentName }}</strong>
     </a>
     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-      <li><a class="dropdown-item" href="#">New project...</a></li>
       <li><a class="dropdown-item" href="#">Settings</a></li>
       <li><a class="dropdown-item" href="#">Profile</a></li>
       <li><hr class="dropdown-divider" /></li>
-      <li><a class="dropdown-item" href="#">Sign out</a></li>
+      <li class="dropdown-item" (click)="signOut()">Sign out</li>
     </ul>
   </div>
 </div>
