@@ -13,6 +13,7 @@ import { ElectivesComponent } from './electives/electives.component';
 import { BonafideComponent } from './bonafide/bonafide.component';
 import { ResultsComponent } from './results/results.component';
 import { QueryComponent } from './query/query.component';
+import { CgpaToPercentagePipe } from './pipes/cgpa-to-percentage.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { QueryComponent } from './query/query.component';
     BonafideComponent,
     ResultsComponent,
     QueryComponent,
+    CgpaToPercentagePipe,
   ],
   imports: [
     CommonModule,
@@ -33,5 +35,6 @@ import { QueryComponent } from './query/query.component';
     StudentModule,
     FacultyModule,
   ],
+  exports: [CgpaToPercentagePipe],
 })
 export class SharedModule {}

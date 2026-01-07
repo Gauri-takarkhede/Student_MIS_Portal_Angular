@@ -4,17 +4,6 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <p>
           <mat-form-field>
-            <mat-label>Login as</mat-label>
-            <mat-select formControlName="role" matNativeControl required>
-              <mat-option value="" disabled selected>Select role</mat-option>
-              <mat-option value="student">Student</mat-option>
-              <mat-option value="faculty">Faculty</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-
-        <p>
-          <mat-form-field>
             <mat-label>MIS Number</mat-label>
             <div class="d-flex">
               <input matInput formControlName="mis" />

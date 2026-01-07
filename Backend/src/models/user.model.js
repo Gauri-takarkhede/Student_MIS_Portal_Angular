@@ -11,9 +11,6 @@ const userSchema = new mongoose.Schema(
       default: "student",
     },
     mis: { type: String },
-    department: { type: String },
-    year: { type: String },
-    cgpa: { type: Number },
   },
   { timestamps: true }
 );

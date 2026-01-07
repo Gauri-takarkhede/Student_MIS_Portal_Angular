@@ -19,6 +19,7 @@ export class StudentRegisterComponent {
         name: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         mis: ['', [Validators.required]],
+        role: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
       },
@@ -46,11 +47,11 @@ export class StudentRegisterComponent {
     }
     this.loading = true;
 
-    const { name, email, mis, password } = this.registerForm.value;
+    const { name, email, mis, password, role } = this.registerForm.value;
 
-    const payload = { name, email, mis, password };
+    const payload = { name, email, mis, password, role };
 
-    this.authService.studentRegister(payload).subscribe({
+    this.authService.userRegister(payload).subscribe({
       next: (res) => {
         this.successMsg = 'Registered successfully!';
         this.errorMsg = '';

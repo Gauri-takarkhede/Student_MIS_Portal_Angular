@@ -11,17 +11,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  studentRegister(data: any) {
-    return this.http.post(`${this.API}/student/register`, data);
+  userRegister(data: any) {
+    return this.http.post(`${this.API}/register`, data);
   }
 
-  studentLogin(data: any) {
-    return this.http.post(`${this.API}/student/login`, data);
+  userLogin(data: any) {
+    return this.http.post(`${this.API}/login`, data);
   }
 
-  facultyLogin(data: any) {
-    return this.http.post(`${this.API}/faculty/login`, data);
-  }
+  // facultyLogin(data: any) {
+  //   return this.http.post(`${this.API}/facul/login`, data);
+  // }
 
   // saveAuth(token: string, role: string) {
   //   sessionStorage.setItem(this.tokenKey, token);

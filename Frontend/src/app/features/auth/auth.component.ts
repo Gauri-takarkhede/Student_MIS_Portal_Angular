@@ -20,7 +20,6 @@ export class AuthComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      role: ['', Validators.required],
       mis: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
@@ -34,15 +33,10 @@ export class AuthComponent {
     if (this.loginForm.invalid) return;
 
     this.loading = true;
-    let { role, mis, password } = this.loginForm.value;
+    let { mis, password } = this.loginForm.value;
     mis = Number(mis);
 
-    const loginFn =
-      role === 'student'
-        ? this.authService.studentLogin.bind(this.authService)
-        : this.authService.facultyLogin.bind(this.authService);
-
-    loginFn({ mis, password }).subscribe({
+    this.authService.userLogin({ mis, password }).subscribe({
       next: (res: any) => {
         this.loading = false;
         this.errorMsg = '';

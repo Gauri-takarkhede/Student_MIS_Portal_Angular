@@ -25,7 +25,7 @@ const bonafideSchema = new mongoose.Schema({
   },
   approvedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Faculty",
+    ref: "User",
     default: null,
   },
   pdfUrl: {

@@ -7,7 +7,7 @@ export const registerUser = async (req, res) => {
     const { name, email, mis, password, role } = req.body;
     const existing = await User.findOne({ mis });
     if (existing)
-      return res.status(400).json({ message: "Student already exists" });
+      return res.status(400).json({ message: "User already exists" });
 
     const hash = await bcrypt.hash(password, 10);
 
@@ -37,7 +37,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user.mis, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
