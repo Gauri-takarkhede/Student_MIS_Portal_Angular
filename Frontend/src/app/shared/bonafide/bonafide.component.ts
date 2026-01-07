@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-bonafide',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BonafideComponent implements OnInit {
   public userRole: String = '';
+
+  constructor(private auth: AuthService) {}
+
   ngOnInit(): void {
-    const user = sessionStorage.getItem('user');
+    const user = this.auth.getUser();
     this.userRole = user ? JSON.parse(user).role : '';
   }
 }

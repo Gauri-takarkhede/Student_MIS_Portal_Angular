@@ -27,6 +27,6 @@ export const createStudent = async (req, res) => {
 };
 
 export const getAllStudents = async (req, res) => {
-  const students = await userSchema.find();
+  const students = await userSchema.find({ role: "student" });
   res.status(200).json(students);
 };

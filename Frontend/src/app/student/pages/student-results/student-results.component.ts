@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ResultService } from 'src/app/shared/services/results.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-student-results',
@@ -9,10 +10,13 @@ import { ResultService } from 'src/app/shared/services/results.service';
 export class StudentResultsComponent {
   results: any = {};
 
-  constructor(private resultService: ResultService) {}
+  constructor(
+    private resultService: ResultService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
-    const student = sessionStorage.getItem('user');
+    const student = this.auth.getUser();
     const mis = student ? JSON.parse(student).mis : 0;
     this.resultService.getStudentResults(mis).subscribe((res: any) => {
       this.results = res;

@@ -3,6 +3,7 @@ import { StudentService } from '../../services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -15,7 +16,8 @@ export class StudentDashboardComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   loadStudent() {
-    const user = sessionStorage.getItem('user');
+    const user = this.auth.getUser();
     const mis = user ? JSON.parse(user).mis : 0;
     this.studentService.getProfile(mis).subscribe({
       next: (res: any) => {

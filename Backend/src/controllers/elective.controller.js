@@ -1,6 +1,7 @@
 import Elective from "../models/electives.model.js";
 import Preference from "../models/studentPreference.js";
 import Allocation from "../models/allocation.model..js";
+import Result from "../models/result.model.js";
 
 /**  Create new elective module  **/
 export const createElective = async (req, res) => {
@@ -79,14 +80,18 @@ export const getAllElectives = async (req, res) => {
 export const submitPreferences = async (req, res) => {
   try {
     const { moduleId, preferences } = req.body;
-    const studentId = req.user.id; // assuming middleware sets req.user
+    const studentId = req.user.id;
 
     //  Check if record already exists
     const existing = await Preference.findOne({ studentId, moduleId });
 
+    const student = await Result.findOne({ studentId: studentId });
+    const cgpa = student.cgpa;
+
     if (existing) {
       // Update existing record
       existing.preferences = preferences;
+      existing.cgpa = cgpa;
       await existing.save();
 
       return res.json({
@@ -100,6 +105,7 @@ export const submitPreferences = async (req, res) => {
       studentId,
       moduleId,
       preferences,
+      cgpa,
     });
 
     res.json({
@@ -134,9 +140,7 @@ export const allocateElectives = async (req, res) => {
     );
 
     // Sort students by CGPA (highest first)
-    const sorted = preferences.sort(
-      (a, b) => b.studentId.cgpa - a.studentId.cgpa
-    );
+    const sorted = preferences.sort((a, b) => b.cgpa - a.cgpa);
 
     let capacity = new Map(elective.maxLimits);
     let allocations = [];
@@ -168,6 +172,88 @@ export const allocateElectives = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// export const allocateElectives = async (req, res) => {
+//   try {
+//     const { moduleId } = req.params;
+
+//     const elective = await Elective.findById(moduleId);
+//     if (!elective) {
+//       return res.status(404).json({ message: "Elective not found" });
+//     }
+
+//     const preferences = await Preference.aggregate([
+//       {
+//         $match: {
+//           moduleId: new mongoose.Types.ObjectId(moduleId),
+//         },
+//       },
+//       {
+//         $lookup: {
+//           from: "users",
+//           localField: "studentId",
+//           foreignField: "_id",
+//           as: "student",
+//         },
+//       },
+//       { $unwind: "$student" },
+//       {
+//         $lookup: {
+//           from: "results",
+//           localField: "studentId",
+//           foreignField: "studentId",
+//           as: "result",
+//         },
+//       },
+//       {
+//         $addFields: {
+//           cgpa: {
+//             $ifNull: [{ $arrayElemAt: ["$result.cgpa", 0] }, 0],
+//           },
+//         },
+//       },
+//       {
+//         $sort: { cgpa: -1 },
+//       },
+//     ]);
+
+//     if (preferences.length === 0) {
+//       return res
+//         .status(400)
+//         .json({ message: "No preferences found for this module" });
+//     }
+
+//     // ✅ FIXED MAP INITIALIZATION
+//     let capacity = new Map(Object.entries(elective.maxLimits));
+//     let allocations = [];
+
+//     for (let pref of preferences) {
+//       let allocated = null;
+
+//       for (let choice of pref.preferences) {
+//         if (capacity.get(choice) > 0) {
+//           allocated = choice;
+//           capacity.set(choice, capacity.get(choice) - 1);
+//           break;
+//         }
+//       }
+
+//       allocations.push({
+//         studentId: pref.studentId,
+//         moduleId,
+//         allocatedSubject: allocated || "Not Allocated",
+//       });
+//     }
+
+//     await Allocation.deleteMany({ moduleId });
+//     await Allocation.insertMany(allocations);
+
+//     res.json({ message: "Allocation completed", allocations });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: err.message });
+//   }
+// };
 
 export const getAllocations = async (req, res) => {
   try {

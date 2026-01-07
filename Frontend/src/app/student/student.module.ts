@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StudentRoutingModule } from './student-routing.module';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { StudentElectivesComponent } from './pages/electives/student-electives.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +21,6 @@ import { MatStepperModule } from '@angular/material/stepper';
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule,
     ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,

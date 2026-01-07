@@ -32,18 +32,15 @@
       </td>
     </ng-container>
 
-    <th mat-header-cell *matHeaderCellDef>Percentage</th>
-    <td mat-cell *matCellDef="let r">{{ r.cgpaGot }}</td>
+    <!-- <th mat-header-cell *matHeaderCellDef>Percentage</th>
+    <td mat-cell *matCellDef="let r">{{ r.cgpaGot }}</td> -->
     <tr
       mat-header-row
-      *matHeaderRowDef="['name', 'cgpaGot', 'passingCgpa', 'percentage']"
+      *matHeaderRowDef="['name', 'cgpaGot', 'passingCgpa']"
     ></tr>
     <tr
       mat-row
-      *matRowDef="
-        let row;
-        columns: ['name', 'cgpaGot', 'passingCgpa', 'percentage']
-      "
+      *matRowDef="let row; columns: ['name', 'cgpaGot', 'passingCgpa']"
     ></tr>
   </table>
 

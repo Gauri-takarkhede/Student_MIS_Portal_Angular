@@ -75,6 +75,7 @@ export const getStudentResults = async (req, res) => {
   try {
     const studentMis = req.user.mis;
     const student = await User.findOne({ mis: studentMis });
+    console.log(student, "student");
     const results = await Result.find({ studentId: student._id });
 
     res.status(200).json(results);
