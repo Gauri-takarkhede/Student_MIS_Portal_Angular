@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ResultService } from 'src/app/shared/services/results.service';
-import { StudentService } from 'src/app/student/services/student.service';
+import { StudentService } from 'src/app/features/student/services/student.service';
 
 @Component({
   selector: 'app-faculty-add-result',

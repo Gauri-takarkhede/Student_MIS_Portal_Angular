@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth.service';
+import { StudentModule } from '../student/student.module';
 
 @Component({
   selector: 'app-bonafide',

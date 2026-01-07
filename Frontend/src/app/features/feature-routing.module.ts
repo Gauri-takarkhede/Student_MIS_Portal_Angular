@@ -6,7 +6,7 @@ import { ElectivesComponent } from './electives/electives.component';
 import { BonafideComponent } from './bonafide/bonafide.component';
 import { ResultsComponent } from './results/results.component';
 import { QueryComponent } from './query/query.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -47,4 +47,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SharedRoutingModule {}
+export class FeatureRoutingModule {}

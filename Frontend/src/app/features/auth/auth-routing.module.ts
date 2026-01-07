@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('../../shared/shared.module').then((m) => m.SharedModule),
+      import('../feature.module').then((m) => m.FeatureModule),
   },
 ];
 
