@@ -23,10 +23,6 @@ const routes: Routes = [
     path: 'allocate',
     component: AllocateElectivesComponent,
   },
-  {
-    path: 'electives',
-    component: FacultyElectivesComponent,
-  },
 ];
 
 @NgModule({

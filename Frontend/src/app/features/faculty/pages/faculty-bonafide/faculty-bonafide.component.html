@@ -1,4 +1,4 @@
-<h2 class="mb-3">All Bonafide Requests</h2>
+<h2 class="m-3">All Bonafide Requests</h2>
 
 <table mat-table [dataSource]="requests" class="mat-elevation-z2 w-100">
   <!-- Student -->
@@ -26,16 +26,16 @@
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let r">
       <button
-        mat-button
-        color="primary"
+        class="btn btn-primary"
+        type="button"
         (click)="approve(r._id)"
         *ngIf="r.status === 'pending'"
       >
         Approve
       </button>
       <button
-        mat-button
-        color="warn"
+        class="btn btn-danger"
+        type="button"
         (click)="reject(r._id)"
         *ngIf="r.status === 'pending'"
       >
