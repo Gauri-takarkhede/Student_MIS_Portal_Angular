@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,30 @@ export class AuthService {
   }
 
   getUser() {
-    return sessionStorage.getItem('user');
+    const token = this.getToken();
+    if (!token) return null;
+
+    const decoded: any = jwtDecode(token);
+    return decoded;
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem('token');
+  }
+
+  getUserRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const decoded: any = jwtDecode(token);
+    return decoded.role;
+  }
+
+  getUserName(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const decoded: any = jwtDecode(token);
+    return decoded.name;
   }
 }

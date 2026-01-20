@@ -26,7 +26,7 @@ export class StudentDashboardComponent implements OnInit {
 
   loadStudent() {
     const user = this.auth.getUser();
-    const mis = user ? JSON.parse(user).mis : 0;
+    const mis = user.id;
     this.studentService.getProfile(mis).subscribe({
       next: (res: any) => {
         this.student = res;

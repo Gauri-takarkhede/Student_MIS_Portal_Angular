@@ -42,7 +42,6 @@ export class AuthComponent {
         this.errorMsg = '';
 
         sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('user', JSON.stringify(res.user));
 
         // Redirect to student dashboard
         this.router.navigate(['/home']);

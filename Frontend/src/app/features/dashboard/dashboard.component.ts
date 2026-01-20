@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +8,11 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  public userRole: String = '';
+  public userRole: String | null = '';
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    const user = this.auth.getUser();
-    this.userRole = user ? JSON.parse(user).role : '';
+    this.userRole = this.auth.getUserRole();
   }
 }

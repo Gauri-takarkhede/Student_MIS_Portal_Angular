@@ -8,14 +8,13 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  public userRole: Number = -1;
-  public studentName: String = '';
+  public userRole: String | null = '';
+  public studentName: String | null = '';
   constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
-    const user = this.auth.getUser();
-    this.studentName = user ? JSON.parse(user).name : '';
-    this.userRole = user ? JSON.parse(user).role : -1;
+    this.studentName = this.auth.getUserName();
+    this.userRole = this.auth.getUserRole();
   }
   signOut(): void {
     sessionStorage.clear();

@@ -7,12 +7,11 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent implements OnInit {
-  public userRole: String = '';
+  public userRole: String | null = '';
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    const user = this.auth.getUser();
-    this.userRole = user ? JSON.parse(user).role : '';
+    this.userRole = this.auth.getUserRole();
   }
 }

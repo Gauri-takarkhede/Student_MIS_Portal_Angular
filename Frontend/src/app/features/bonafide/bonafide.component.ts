@@ -8,12 +8,11 @@ import { StudentModule } from '../student/student.module';
   styleUrls: ['./bonafide.component.scss'],
 })
 export class BonafideComponent implements OnInit {
-  public userRole: String = '';
+  public userRole: String | null = '';
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    const user = this.auth.getUser();
-    this.userRole = user ? JSON.parse(user).role : '';
+    this.userRole = this.auth.getUserRole();
   }
 }

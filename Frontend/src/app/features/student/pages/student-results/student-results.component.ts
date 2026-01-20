@@ -17,7 +17,7 @@ export class StudentResultsComponent {
 
   ngOnInit() {
     const student = this.auth.getUser();
-    const mis = student ? JSON.parse(student).mis : 0;
+    const mis = student.id;
     this.resultService.getStudentResults(mis).subscribe((res: any) => {
       this.results = res;
       console.log(this.results);
