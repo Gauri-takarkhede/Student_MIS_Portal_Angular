@@ -12,12 +12,12 @@ export class StudentResultsComponent {
 
   constructor(
     private resultService: ResultService,
-    private auth: AuthService
+    private auth: AuthService,
   ) {}
 
   ngOnInit() {
     const student = this.auth.getUser();
-    const mis = student.id;
+    const mis = student?.id;
     this.resultService.getStudentResults(mis).subscribe((res: any) => {
       this.results = res;
       console.log(this.results);

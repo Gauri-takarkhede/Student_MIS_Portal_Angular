@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FacultyBonafideComponent } from './faculty-bonafide.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatTableModule } from '@angular/material/table';
 
 describe('FacultyBonafideComponent', () => {
   let component: FacultyBonafideComponent;
@@ -8,9 +10,9 @@ describe('FacultyBonafideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FacultyBonafideComponent ]
-    })
-    .compileComponents();
+      declarations: [FacultyBonafideComponent],
+      imports: [HttpClientTestingModule, MatTableModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FacultyBonafideComponent);
     component = fixture.componentInstance;

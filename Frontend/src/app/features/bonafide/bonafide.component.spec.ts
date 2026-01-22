@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BonafideComponent } from './bonafide.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BonafideComponent', () => {
   let component: BonafideComponent;
@@ -8,9 +9,9 @@ describe('BonafideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BonafideComponent ]
-    })
-    .compileComponents();
+      declarations: [BonafideComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BonafideComponent);
     component = fixture.componentInstance;

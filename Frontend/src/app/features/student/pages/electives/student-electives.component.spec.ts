@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ElectivesComponent } from './student-electives.component';
+import { StudentElectivesComponent } from './student-electives.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-describe('ElectivesComponent', () => {
-  let component: ElectivesComponent;
-  let fixture: ComponentFixture<ElectivesComponent>;
+describe('StudentElectivesComponent', () => {
+  let component: StudentElectivesComponent;
+  let fixture: ComponentFixture<StudentElectivesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ElectivesComponent],
+      declarations: [StudentElectivesComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ElectivesComponent);
+    fixture = TestBed.createComponent(StudentElectivesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
