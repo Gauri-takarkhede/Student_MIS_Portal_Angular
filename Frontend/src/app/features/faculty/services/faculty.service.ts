@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FacultyService {
   private baseUrl = 'http://localhost:5000/api/electives';
+  private facultyBaseUrl = 'http://localhost:5000/api/faculty';
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +34,7 @@ export class FacultyService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
   }
 
@@ -55,5 +56,13 @@ export class FacultyService {
 
   reject(id: string) {
     return this.http.patch(`${this.baseUrl}/bonafide/reject/${id}`, {});
+  }
+
+  addStudentDetails(data: any) {
+    return this.http.post(`${this.facultyBaseUrl}/addStudentDetails`, { data });
+  }
+
+  getAllStudents() {
+    return this.http.get(`${this.facultyBaseUrl}/allStudents`);
   }
 }

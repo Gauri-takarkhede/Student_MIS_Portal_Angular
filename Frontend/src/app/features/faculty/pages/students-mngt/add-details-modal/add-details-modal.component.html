@@ -1,0 +1,136 @@
+<h4 class="p-3 border-bottom">Add Details for {{ student.name }}</h4>
+
+<div mat-dialog-content>
+  <form [formGroup]="personalDetailsFormGroup">
+    <ng-template matStepLabel>Personal details</ng-template>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Address Line 1</mat-label>
+          <input
+            matInput
+            placeholder="Permanent Address"
+            formControlName="address"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="City" formControlName="city" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="State" formControlName="state" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Blood Group</mat-label>
+          <mat-select formControlName="selectedBloodGroup">
+            <mat-option *ngFor="let group of bloodGroups" [value]="group">{{
+              group
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category"
+              >{{ category }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Religion</mat-label>
+          <mat-select formControlName="religion">
+            <mat-option *ngFor="let religion of religions" [value]="religion">{{
+              religion
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Course</mat-label>
+          <mat-select formControlName="course">
+            <mat-option *ngFor="let course of courses" [value]="course">{{
+              course
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender">{{
+              gender
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [max]="maxDate"
+            formControlName="dateOfBirth"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field class="fields">
+          <mat-label>Date of Admission</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [max]="maxDate"
+            formControlName="dateOfAdmission"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="p-3 justify-content-end" mat-dialog-actions>
+  <button
+    class="action-button border-0 bg-transparent"
+    mat-button
+    (click)="onClose()"
+  >
+    Cancel
+  </button>
+  <button
+    class="action-button border-0 bg-transparent"
+    mat-raised-button
+    color="primary"
+    (click)="submitDeatils()"
+  >
+    Confirm
+  </button>
+</div>

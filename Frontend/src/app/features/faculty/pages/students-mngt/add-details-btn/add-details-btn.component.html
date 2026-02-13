@@ -1,0 +1,10 @@
+<!-- <ng-container *ngIf="value">Done</ng-container> -->
+<ng-container *ngIf="value == undefined"
+  ><button
+    class="col-auto add-button border-0 bg-transparent"
+    matButton
+    (click)="addDetails()"
+  >
+    Add Details
+  </button>
+</ng-container>

@@ -1,5 +1,11 @@
 import userSchema from "../models/user.model.js";
 
+export const getStudentById = async (req, res) => {
+  const { id } = req.params;
+  const student = await userSchema.findById(id);
+  res.json(student);
+};
+
 export const getStudents = async (req, res) => {
   const students = await userSchema.find();
   res.json(students);

@@ -1,0 +1,293 @@
+<div class="p-3 bg-gray-100">
+  <!-- Loading -->
+  <!-- <div *ngIf="loading" class="text-center text-gray-600">
+    Loading your dashboard...
+  </div> -->
+
+  <!-- Profile Section -->
+  <div class="bg-white p-5 rounded-xl shadow-md mb-6">
+    <h2 class="text-xl font-semibold mb-4">Add New Student</h2>
+
+    <form [formGroup]="studentFormGroup" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="fields">
+            <mat-label>Name of the Student </mat-label>
+            <input matInput placeholder="Full Name" formControlName="name" />
+            <mat-error
+              *ngIf="
+                studentFormGroup.get('name')?.hasError('required') &&
+                studentFormGroup.get('name')?.touched
+              "
+            >
+              Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="fields">
+            <mat-label>MIS Number</mat-label>
+            <input matInput placeholder="Student's MIS" formControlName="mis" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="fields">
+            <mat-label>Mail Id</mat-label>
+            <input
+              matInput
+              placeholder="Student's Mail Id"
+              formControlName="email"
+              type="email"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="fields">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department">
+              <mat-option *ngFor="let dept of departments" [value]="dept">{{
+                dept
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="fields">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              placeholder="Create password"
+              type="password"
+              formControlName="password"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <button
+        class="col-auto stepper-button border-0 bg-transparent"
+        type="submit"
+        matButton
+      >
+        Create
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="showDeatailsTab" class="personal-info">
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="personalDetailsFormGroup">
+        <form [formGroup]="personalDetailsFormGroup">
+          <ng-template matStepLabel>Personal details</ng-template>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Address Line 1</mat-label>
+                <input
+                  matInput
+                  placeholder="Permanent Address"
+                  formControlName="address"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="City" formControlName="city" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="State" formControlName="state" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Blood Group</mat-label>
+                <mat-select formControlName="selectedBloodGroup">
+                  <mat-option
+                    *ngFor="let group of bloodGroups"
+                    [value]="group"
+                    >{{ group }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option
+                    *ngFor="let category of categories"
+                    [value]="category"
+                    >{{ category }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Religion</mat-label>
+                <mat-select formControlName="religion">
+                  <mat-option
+                    *ngFor="let religion of religions"
+                    [value]="religion"
+                    >{{ religion }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">{{
+                    gender
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Date of Birth</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  [max]="maxDate"
+                  formControlName="dateOfBirth"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="academicsFormGroup" label="Academic details">
+        <form [formGroup]="academicsFormGroup">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Course</mat-label>
+                <mat-select formControlName="course">
+                  <mat-option *ngFor="let course of courses" [value]="course">{{
+                    course
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6 offset-6"></div>
+            <div class="col-md-6">
+              <mat-form-field class="fields">
+                <mat-label>Date of Admission</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  [max]="maxDate"
+                  formControlName="dateOfAdmission"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+
+        <div class="review-section">
+          <h3>Personal Details</h3>
+          <p>
+            <strong>Address:</strong>
+            {{ personalDetailsFormGroup.value.address }}
+          </p>
+          <p>
+            <strong>City:</strong> {{ personalDetailsFormGroup.value.city }}
+          </p>
+          <p>
+            <strong>State:</strong> {{ personalDetailsFormGroup.value.state }}
+          </p>
+          <p>
+            <strong>Blood Group:</strong>
+            {{ personalDetailsFormGroup.value.selectedBloodGroup }}
+          </p>
+          <p>
+            <strong>Category:</strong>
+            {{ personalDetailsFormGroup.value.category }}
+          </p>
+          <p>
+            <strong>Religion:</strong>
+            {{ personalDetailsFormGroup.value.religion }}
+          </p>
+
+          <hr />
+
+          <h3>Academic Details</h3>
+          <p><strong>Course:</strong> {{ academicsFormGroup.value.course }}</p>
+          <p>
+            <strong>Date of Admission:</strong>
+            {{ academicsFormGroup.value.dateOfAdmission | date: "dd/MM/yyyy" }}
+          </p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="stepper-button border-0 bg-transparent"
+              matButton
+              (click)="stepper.reset()"
+            >
+              Reset
+            </button>
+          </div>
+          <button
+            class="col-auto stepper-button border-0 bg-transparent"
+            (click)="submitDeatils()"
+            matButton
+          >
+            Submit
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

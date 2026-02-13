@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, mis, password, role } = req.body;
+    const { name, email, mis, password, role, department } = req.body;
     const existing = await User.findOne({ mis });
     if (existing)
       return res.status(400).json({ message: "User already exists" });
@@ -16,7 +16,8 @@ export const registerUser = async (req, res) => {
       email,
       mis,
       password: hash,
-      role: role || "student", // default student
+      role: role,
+      department: department,
     });
 
     return res.status(201).json({ message: "User registered successfully" });

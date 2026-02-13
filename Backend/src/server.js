@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes.js";
 import resultRoutes from "./routes/result.routes.js";
 import feedbackRoutes from "./routes/feedback.routes.js";
 import bonafideRoutes from "./routes/bonafide.routes.js";
+import facultyRoutes from "./routes/faculty.routes.js";
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/results", resultRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/bonafide", bonafideRoutes);
+app.use("/api/faculty", facultyRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

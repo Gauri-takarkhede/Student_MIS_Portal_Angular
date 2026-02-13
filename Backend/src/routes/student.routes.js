@@ -4,6 +4,7 @@ import {
   createStudent,
   getStudentInfo,
   getAllStudents,
+  getStudentById,
 } from "../controllers/student.controller.js";
 import {
   submitPreferences,
@@ -19,5 +20,6 @@ router.post("/", createStudent);
 router.get("/published", getNonPublishedElectives);
 router.post("/submitElectives", auth, submitPreferences);
 router.get("/getAllStudents", getAllStudents);
+router.get("/:id", getStudentById);
 
 export default router;

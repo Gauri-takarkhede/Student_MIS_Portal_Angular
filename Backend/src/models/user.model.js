@@ -11,8 +11,13 @@ const userSchema = new mongoose.Schema(
       default: "student",
     },
     mis: { type: String },
+    department: { type: String },
+    studentDetailsId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "StudentDetails",
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("User", userSchema);

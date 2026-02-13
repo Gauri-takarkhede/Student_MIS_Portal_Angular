@@ -13,11 +13,26 @@ import { AuthService } from 'src/app/core/auth.service';
 export class StudentDashboardComponent implements OnInit {
   student: any = null;
   loading = true;
+  bloodGroups: string[] = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  categories: string[] = ['General', 'OBC', 'SC', 'ST', 'EWS'];
+  religions: string[] = [
+    'Hindu',
+    'Muslim',
+    'Christian',
+    'Sikh',
+    'Buddhist',
+    'Jain',
+    'Parsi',
+    'Jewish',
+    'Other',
+  ];
+  courses: string[] = ['B.Tech', 'M.Tech'];
+  maxDate = new Date();
 
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute,
-    private auth: AuthService
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +55,17 @@ export class StudentDashboardComponent implements OnInit {
 
   private _formBuilder = inject(FormBuilder);
 
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+  personalDetailsFormGroup = this._formBuilder.group({
+    address: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
+    selectedBloodGroup: ['', Validators.required],
+    category: ['', Validators.required],
+    religion: ['', Validators.required],
   });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+
+  academicsFormGroup = this._formBuilder.group({
+    course: ['', Validators.required],
+    dateOfAdmission: ['', Validators.required],
   });
 }

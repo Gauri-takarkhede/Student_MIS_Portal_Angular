@@ -1,0 +1,11 @@
+<mat-tab-group #stepper>
+  <mat-tab label="Add Students">
+    <app-add-student
+      (goToALlStudentsStep)="moveToAllStudentsStep()"
+    ></app-add-student>
+  </mat-tab>
+  <mat-tab label="Students">
+    <app-all-students></app-all-students>
+  </mat-tab>
+  <!-- <mat-tab label="Allocations"> </mat-tab> -->
+</mat-tab-group>

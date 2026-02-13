@@ -31,6 +31,16 @@
         <span class="mx-2">Dashboard</span>
       </div>
     </li>
+    <li *ngIf="userRole == 'faculty'">
+      <div
+        routerLink="students"
+        class="nav-link link-dark d-flex"
+        routerLinkActive="active"
+      >
+        <mat-icon>school</mat-icon>
+        <span class="mx-2">Students</span>
+      </div>
+    </li>
     <li>
       <div
         routerLink="electives"

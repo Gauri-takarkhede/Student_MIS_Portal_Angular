@@ -20,6 +20,10 @@ export class StudentService {
     });
   }
 
+  getStudentById(id: any) {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
+
   getProfile(mis: any) {
     return this.http.get(`${this.baseUrl}/profile/${mis}`);
   }
