@@ -16,6 +16,13 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "StudentDetails",
     },
+    facultyDetailsId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "FacultyDetails",
+    },
+    profileImage: {
+      type: String,
+    },
   },
   { timestamps: true },
 );

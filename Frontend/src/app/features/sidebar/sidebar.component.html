@@ -17,7 +17,7 @@
       style="height: 50px"
       class="mx-2"
     />
-    <span class="fs-4">MIS Portal</span>
+    <span class="fs-4">COEP Tech</span>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
@@ -71,7 +71,7 @@
         <span class="mx-2">Bonafide</span>
       </div>
     </li>
-    <li>
+    <!-- <li>
       <div
         routerLink="query"
         class="nav-link link-dark d-flex"
@@ -80,7 +80,7 @@
         <mat-icon>help_center</mat-icon>
         <span class="mx-2">Query</span>
       </div>
-    </li>
+    </li> -->
   </ul>
   <hr />
   <div class="dropdown">
@@ -92,7 +92,7 @@
       aria-expanded="false"
     >
       <img
-        src="https://github.com/mdo.png"
+        [src]="profileImage || './assets/profile.jpg'"
         alt=""
         width="32"
         height="32"

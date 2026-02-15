@@ -18,3 +18,10 @@
 .fields {
   width: 100%;
 }
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1976d2;
+}

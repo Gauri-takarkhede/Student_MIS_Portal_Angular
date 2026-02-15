@@ -12,7 +12,12 @@ export class FacultyService {
 
   // CREATE elective module
   createElective(payload: any) {
-    return this.http.post(`${this.baseUrl}/create`, payload);
+    const token = sessionStorage.getItem('token');
+    return this.http.post(`${this.baseUrl}/create`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   // GET all electives
@@ -36,6 +41,15 @@ export class FacultyService {
         },
       },
     );
+  }
+
+  deleteElective(moduleId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.delete(`${this.baseUrl}/delete/${moduleId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   getAllocations(moduleId: string) {
@@ -64,5 +78,9 @@ export class FacultyService {
 
   getAllStudents() {
     return this.http.get(`${this.facultyBaseUrl}/allStudents`);
+  }
+
+  addFacultyDetails(data: any) {
+    return this.http.post(`${this.facultyBaseUrl}/addFacultyDetails`, { data });
   }
 }

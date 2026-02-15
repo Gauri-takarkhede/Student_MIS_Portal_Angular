@@ -22,8 +22,8 @@ export const createElective = async (req, res) => {
     const newElective = new Elective({
       moduleName,
       subjects,
-      maxLimits: limitsMap, // <-- IMPORTANT FIX
-      createdBy: req.user?.id || null, // <-- Avoid crash
+      maxLimits: limitsMap,
+      createdBy: req.user?.name || null,
     });
 
     console.log("New Elective Object:", newElective);
@@ -47,7 +47,7 @@ export const publishElective = async (req, res) => {
     const elective = await Elective.findByIdAndUpdate(
       req.params.id,
       { isPublished: true },
-      { new: true }
+      { new: true },
     );
 
     res.json({ message: "Module published", elective });
@@ -136,7 +136,7 @@ export const allocateElectives = async (req, res) => {
     console.log(moduleId, "moduleId");
     const elective = await Elective.findById(moduleId);
     const preferences = await Preference.find({ moduleId }).populate(
-      "studentId"
+      "studentId",
     );
 
     // Sort students by CGPA (highest first)
@@ -168,6 +168,21 @@ export const allocateElectives = async (req, res) => {
     await Allocation.insertMany(allocations);
 
     res.json({ message: "Allocation completed", allocations });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const deleteElective = async (req, res) => {
+  try {
+    const { moduleId } = req.params;
+    console.log(moduleId, "moduleId");
+    const deleted = await Elective.deleteOne({ _id: moduleId });
+    if (!deleted) {
+      return res.status(404).json({ message: "Elective not found" });
+    }
+
+    res.json({ message: "Elective deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -261,7 +276,7 @@ export const getAllocations = async (req, res) => {
     console.log(moduleId);
 
     const allocations = await Allocation.find({ moduleId }).populate(
-      "studentId"
+      "studentId",
     );
     console.log(allocations);
 

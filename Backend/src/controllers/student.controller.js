@@ -14,7 +14,10 @@ export const getStudents = async (req, res) => {
 export const getStudentInfo = async (req, res) => {
   try {
     const { mis } = req.params;
-    const student = await userSchema.findOne({ mis });
+    const details =
+      req.user.role == "student" ? "studentDetailsId" : "facultyDetailsId";
+
+    const student = await userSchema.findOne({ mis }).populate(details);
 
     if (!student) {
       return res.status(404).json({ message: "Student not found" });

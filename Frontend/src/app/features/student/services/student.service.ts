@@ -25,7 +25,12 @@ export class StudentService {
   }
 
   getProfile(mis: any) {
-    return this.http.get(`${this.baseUrl}/profile/${mis}`);
+    const token = sessionStorage.getItem('token');
+    return this.http.get(`${this.baseUrl}/profile/${mis}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   getAllProfiles() {

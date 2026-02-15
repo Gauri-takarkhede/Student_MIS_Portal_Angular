@@ -15,7 +15,7 @@ import { auth } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.get("/profiles", getStudents);
-router.get("/profile/:mis", getStudentInfo);
+router.get("/profile/:mis", auth, getStudentInfo);
 router.post("/", createStudent);
 router.get("/published", getNonPublishedElectives);
 router.post("/submitElectives", auth, submitPreferences);

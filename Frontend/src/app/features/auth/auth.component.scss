@@ -4,24 +4,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(../../../assets/COEP_Tech.jpg);
+  background-size: cover;
 
-  .login-card {
-    width: 100%;
-    max-width: 400px;
-    background-color: rgb(211, 231, 248);
-    text-align: center;
+  .login-overlay {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.486);
 
-    form {
-      mat-form-field {
-        width: 100%;
+    .login-card {
+      margin: auto;
+      width: 100%;
+      max-width: 400px;
+      background-color: rgb(211, 231, 248);
+      text-align: center;
+
+      img {
+        margin: auto;
+        height: auto;
+        width: 100px;
       }
 
-      .submit-btn {
-        width: 80%;
-        padding: 10px 20px;
-        border-radius: 24px;
-        border: none;
-        box-shadow: 1px 2px rgb(203, 210, 216);
+      form {
+        mat-form-field {
+          width: 100%;
+        }
+
+        .submit-btn {
+          width: 80%;
+          padding: 10px 20px;
+          border-radius: 24px;
+          border: none;
+          box-shadow: 1px 2px rgb(203, 210, 216);
+        }
       }
     }
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacultyService } from '../../services/faculty.service';
+import { ElectivesService } from '../../services/electives.service';
 
 @Component({
   selector: 'app-allocate-electives',
@@ -11,22 +12,26 @@ export class AllocateElectivesComponent implements OnInit {
   selectedModule: any = null;
   loading = false;
 
-  constructor(private facultyService: FacultyService) {}
+  constructor(
+    private facultyService: FacultyService,
+    private electivesService: ElectivesService,
+  ) {}
 
   ngOnInit(): void {
-    this.loadModules();
-  }
+    this.electivesService.electives$.subscribe((data) => {
+      this.modules = data;
 
-  loadModules() {
-    this.facultyService.getAllElectives().subscribe((res) => {
-      this.modules = res;
+      // Load from API only if empty
+      if (data.length === 0) {
+        this.loadModules();
+      }
     });
   }
 
-  onModuleSelect(event: Event) {
-    const select = event.target as HTMLSelectElement;
-    const id = select.value;
-    this.selectedModule = this.modules.find((m: any) => m._id === id);
+  loadModules() {
+    this.facultyService.getAllElectives().subscribe((res: any) => {
+      this.electivesService.setElectives(res);
+    });
   }
 
   allocate(id: string) {
@@ -44,5 +49,12 @@ export class AllocateElectivesComponent implements OnInit {
     });
   }
 
-  delete(id: Number): void {}
+  delete(id: string): void {
+    this.facultyService.deleteElective(id).subscribe({
+      next: (res) => {
+        alert('Elective has been deleted successfully');
+        this.electivesService.removeElective(id);
+      },
+    });
+  }
 }

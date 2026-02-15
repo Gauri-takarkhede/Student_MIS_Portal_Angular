@@ -1,38 +1,42 @@
 <div class="login-page">
-  <mat-card class="login-card">
-    <mat-card-content class="p-5">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <p>
-          <mat-form-field>
-            <mat-label>MIS Number</mat-label>
-            <div class="d-flex">
-              <input matInput formControlName="mis" />
-            </div>
-          </mat-form-field>
-        </p>
+  <div class="login-overlay">
+    <mat-card class="login-card p-3 mt-5">
+      <img src="../../../assets/COEP-Tech-Pune-Logo.png" alt="coep-logo" />
+      <h3 class="text-center py-2">COEP Technological University Pune</h3>
+      <mat-card-content class="p-4">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field>
+              <mat-label>MIS Number</mat-label>
+              <div class="d-flex">
+                <input matInput formControlName="mis" />
+              </div>
+            </mat-form-field>
+          </p>
 
-        <p>
-          <!-- Mat Password -->
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <div class="d-flex">
-              <input
-                matInput
-                [type]="hide ? 'password' : 'text'"
-                formControlName="password"
-              />
+          <p>
+            <!-- Mat Password -->
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <div class="d-flex">
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                />
 
-              <span (click)="togglePassword()">
-                <mat-icon>{{
-                  hide ? "visibility_off" : "visibility"
-                }}</mat-icon>
-              </span>
-            </div>
-          </mat-form-field>
-        </p>
+                <span (click)="togglePassword()">
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </span>
+              </div>
+            </mat-form-field>
+          </p>
 
-        <button class="submit-btn" type="submit" mat-button>Login</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+          <button class="submit-btn" type="submit" mat-button>Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

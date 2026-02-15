@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { FacultyService } from '../../services/faculty.service';
+import { ElectivesService } from '../../services/electives.service';
 
 @Component({
   selector: 'app-create-electives',
@@ -12,7 +13,8 @@ export class CreateElectivesComponent {
 
   constructor(
     private fb: FormBuilder,
-    private electiveService: FacultyService
+    private facultyService: FacultyService,
+    private electivesService: ElectivesService,
   ) {
     this.electiveForm = this.fb.group({
       moduleName: ['', Validators.required],
@@ -50,10 +52,6 @@ export class CreateElectivesComponent {
     }
 
     const { moduleName, subjectsArr } = this.electiveForm.value;
-
-    // Transform into shape your backend expects:
-    // subjects: array of strings
-    // maxLimits: object or Map-like plain object { "Subject1": 10, "Subject2": 5 }
     const subjects = subjectsArr.map((s: any) => s.subject);
     const maxLimitsObj: Record<string, number> = {};
     subjectsArr.forEach((s: any) => {
@@ -66,16 +64,18 @@ export class CreateElectivesComponent {
       maxLimits: maxLimitsObj,
     };
 
-    // Send payload
-    this.electiveService.createElective(payload).subscribe({
-      next: () => {
+    this.facultyService.createElective(payload).subscribe({
+      next: (res: any) => {
         alert('Elective module created successfully!');
         this.electiveForm.reset();
         // clear FormArray
         while (this.subjectsArr.length) {
           this.subjectsArr.removeAt(0);
         }
-        this.addSubject(); // add initial empty row if you want
+        this.addSubject();
+        console.log(res);
+        const newElective = res.elective;
+        this.electivesService.addElective(newElective);
       },
       error: (err) => {
         console.error(err);
