@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private API = 'http://localhost:5000/api/auth';
+  private API = `${environment.apiUrl}/api/auth`;
   private tokenKey = 'token';
   // private roleKey = 'misRole';
 

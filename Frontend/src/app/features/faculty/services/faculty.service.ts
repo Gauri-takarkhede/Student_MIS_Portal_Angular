@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FacultyService {
-  private baseUrl = 'http://localhost:5000/api/electives';
-  private facultyBaseUrl = 'http://localhost:5000/api/faculty';
+  private baseUrl = `${environment.apiUrl}/api/electives`;
+  private facultyBaseUrl = `${environment.apiUrl}/api/faculty`;
 
   constructor(private http: HttpClient) {}
 

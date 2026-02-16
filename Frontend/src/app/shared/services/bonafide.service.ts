@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BonafideService {
-  private base = 'http://localhost:5000/api/bonafide';
+  private base = `${environment.apiUrl}/api/bonafide`;
 
   constructor(private http: HttpClient) {}
 
@@ -45,7 +46,7 @@ export class BonafideService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
   }
 
@@ -58,7 +59,7 @@ export class BonafideService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
   }
 
