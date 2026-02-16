@@ -14,7 +14,14 @@ import profileRoutes from "./routes/profile.routes.js";
 const app = express();
 
 // Middlewares
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:4200", process.env.CLIENT_URL].filter(Boolean),
+    credentials: true,
+  }),
+);
+
 app.use(express.json());
 
 // Connect Database
@@ -31,7 +38,7 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/profile", profileRoutes);
 
 // Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
